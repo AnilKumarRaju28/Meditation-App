@@ -1,37 +1,34 @@
-import { Tabs } from 'expo-router';
+import { View, Text } from 'react-native';
 import React from 'react';
+import { Tabs } from 'expo-router';
+import Colors from '@/constants/Colors';
+import { MaterialCommunityIcons, Entypo } from "@expo/vector-icons";
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const TabsLayout = () => {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
+   <Tabs screenOptions={{ headerShown: false, tabBarActiveTintColor: Colors.primary }}>
+    <Tabs.Screen name="nature-meditate" options={{ 
+        tabBarLabel: 'Meditate',
+        tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="flower-tulip"
+              color={color}
+              size={size} // Use the size parameter here
+            />
+        ),
+    }}/>
+    <Tabs.Screen name="affirmations" options={{ 
+        tabBarLabel: 'Affirmations',
+        tabBarIcon: ({ color, size }) => (
+            <Entypo
+              name="open-book" // Correct icon name
+              color={color}
+              size={size} // Use the size parameter here
+            />
+        ),
+    }}/>
+   </Tabs>
   );
 }
+
+export default TabsLayout;
